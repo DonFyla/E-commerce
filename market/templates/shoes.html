@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>Interface</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        {% load static %}
+        {% static "media" as baseUrl %}
+        <link rel="stylesheet" href="{% static 'shoes.css' %}"/>
+    <body>
+        <nav>
+            <div class="navtop">
+                <div class="navitem">
+                    <img src="{% static 'media/pexels-pixabay-36717.jpg' %}" width="200" height="100" alt="DAWN.">
+                </div>
+                <div class="navitem">
+                    <h3 class="desc">shirts for gentlemen and not so gentlemen </h3>
+                </div>
+                <div class="navitem">
+                    <h1 class="companyname">ELVIN!</h1>
+                </div>
+            </div>
+           <div class="nav-bottom">
+                <div class="search2">
+                    <input class="search1" type="text" placeholder="Search Items">
+                    <button type="submit">Search</button>
+                </div>
+                <div class="contactsection">
+                    <div class="navitemm">
+                        <h4 class="home"><a href="/"> Home </a> </h4>
+                        <h4 class="about">About us </h4>
+                        <h4 class="contact">Contact us </h4>
+                        {% if user.is_authenticated %}
+                        <h4 class="greetings"> Hello, {{user.first_name}}</h4>
+                        <h4 class="login"><a href="accounts/logout">Logout </a> </h4>
+                        {% else %}
+                        <h4 class="login"><a href="accounts/login">Login </a> </h4>
+                        <h4 class="register"><a href="accounts/register">Register</a></h4>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="filter_cart">
+                    <div class="filter2">
+                        <select name="filter by price" id="filter1"placeholder="hfhfhfh">
+                            <option disabled="disabled" selected="selected" style="color: #000;">  Filter By Price</option>
+                            <option value="">100-1000</option>
+                            <option value="">100-1000</option>
+                            <option value="">100-1000</option>
+                            <option value="">100-1000</option>
+                        </select>
+                    </div>
+                    <div class="cart">
+                          <img src="{% static 'media/add_to_cart.png' %}" width="50px" height="50px" alt="cart">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </nav>
+        <div class="bodyitem">
+            {% for item in items %}
+            <div class="card">
+                <img class="imgg" src="{{item.img.url}}" alt="item's photo">
+                <h3>{{ item.name }}</h3>
+                <p class="price">NGN {{ item.price }}</p>
+                <p>
+                    {{ item.desc }}
+                </p>
+
+                <button>Add to cart</button>
+
+
+            </div>
+            {% endfor%}
+
+
+        </div>
+
+    </body>
+</html>
